@@ -6,6 +6,7 @@ import { Comment } from "../../interfaces/IApiResponse";
 interface DataCardState {
   listCardValue: Comment[];
   isLoading: boolean;
+  isFetching: boolean;
   error?: Error;
 }
 
@@ -13,22 +14,30 @@ interface DataCardState {
 const initialState: DataCardState = {
   listCardValue: [],
   isLoading: false,
+  isFetching: false,
 };
-//cambiare nome CommentsSlice
+
 export const commentSlice = createSlice({
   name: "dataCards",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     setStartLoading: (state) => {
-      state.isLoading = true;
+      if (!state.listCardValue.length) {
+        state.isLoading = true;
+        return;
+      }
+      state.isFetching = true;
     },
     updateDataContentCard: (state, { payload }: PayloadAction<Comment[]>) => {
       state.listCardValue = [...state.listCardValue, ...payload];
+      if (state.listCardValue.length) {
+        state.isFetching = false;
+      }
       state.isLoading = false;
     },
     setCommentsFailure: (state, { payload }: PayloadAction<Error>) => {
       state.isLoading = false;
+      state.isFetching = false;
       state.error = payload;
     },
   },
