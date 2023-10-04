@@ -20,8 +20,6 @@ export const commentSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    //conviene fare cosi per la gestione di loading?
-    //update
     setStartLoading: (state) => {
       state.isLoading = true;
     },
