@@ -5,10 +5,10 @@ import { RenderResponse } from "./utils/renderResponse/RenderResponse";
 import { useHandleRenderListComments } from "./utils/hooks/useHandleRenderListComments";
 
 export const ListCards: FC = () => {
-  const { listCardValue, isLoading } = useSelector(
+  const { listCardValue, isFetching } = useSelector(
     ({ dataCards }: RootState) => dataCards
   );
-  useHandleRenderListComments(listCardValue.length, isLoading);
+  useHandleRenderListComments(listCardValue.length, isFetching);
 
   return <RenderResponse listCardValue={listCardValue} />;
 };

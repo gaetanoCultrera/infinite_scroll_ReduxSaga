@@ -6,17 +6,17 @@ import { Event } from "../../../../constans/Event";
 
 export const useHandleRenderListComments = (
   lenghtListCardValue: number,
-  isLoading: boolean
+  isFetching: boolean
 ) => {
   const skipRef = useRef(0);
   const dispatch = useDispatch();
-  const handleScroll = useHandleScroll({ isLoading, skipRef });
+  const handleScroll = useHandleScroll({ isFetching, skipRef });
 
   useEffect(() => {
     if (!lenghtListCardValue) {
       dispatch({ type: KeySagas.FETCH_COMMENTS, payload: skipRef.current });
     }
-  }, [dispatch, lenghtListCardValue, skipRef]);
+  }, [dispatch, lenghtListCardValue]);
 
   useEffect(() => {
     const { addEventListener, removeEventListener } = window;

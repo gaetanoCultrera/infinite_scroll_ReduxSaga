@@ -1,4 +1,4 @@
 export interface IPropsHandleScroll {
-  isLoading: boolean;
+  isFetching: boolean;
   skipRef: React.MutableRefObject<number>;
 }

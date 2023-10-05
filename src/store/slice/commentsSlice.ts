@@ -24,16 +24,13 @@ export const commentSlice = createSlice({
     setStartLoading: (state) => {
       if (!state.listCardValue.length) {
         state.isLoading = true;
-        return;
       }
       state.isFetching = true;
     },
     updateDataContentCard: (state, { payload }: PayloadAction<Comment[]>) => {
+      if (state.isLoading) state.isLoading = false;
+      if (state.isFetching) state.isFetching = false;
       state.listCardValue = [...state.listCardValue, ...payload];
-      if (state.listCardValue.length) {
-        state.isFetching = false;
-      }
-      state.isLoading = false;
     },
     setCommentsFailure: (state, { payload }: PayloadAction<Error>) => {
       state.isLoading = false;
