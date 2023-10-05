@@ -14,6 +14,5 @@ export const useHandleScroll = ({
       skipRef.current += 10;
       dispatch({ type: KeySagas.FETCH_COMMENTS, payload: skipRef.current });
     }
-    //perchè me la richiede?
   }, [dispatch, isFetching, skipRef]);
 };
