@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { Comment } from "../../interfaces/IApiResponse";
 
 // Define a type for the slice state
-interface DataCardState {
+export interface DataCardState {
   listCardValue: Comment[];
   isLoading: boolean;
   isFetching: boolean;

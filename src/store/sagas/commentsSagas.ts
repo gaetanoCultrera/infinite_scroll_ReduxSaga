@@ -24,7 +24,7 @@ const fetchCommentsCall = () => ({
       }: AxiosResponse<RootResponse> = yield axios.get<RootResponse>(
         `https://dummyjson.com/comments?limit=10&skip=${skipValue}`
       );
-      console.log(skipValue);
+      console.log(comments);
       yield put(updateDataContentCard(comments));
     } catch (e) {
       yield put(setCommentsFailure(e as Error));
