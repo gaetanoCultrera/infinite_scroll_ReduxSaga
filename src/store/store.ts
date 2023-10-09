@@ -1,18 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  PreloadedState,
+  combineReducers,
+  configureStore,
+} from "@reduxjs/toolkit";
 import commentSlice from "./slice/commentsSlice";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSagas";
 const sagaMiddleware = createSagaMiddleware();
-export const store = configureStore({
-  reducer: {
-    dataCards: commentSlice,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+
+const rootReducer = combineReducers({
+  dataCards: commentSlice,
 });
 
-sagaMiddleware.run(rootSaga);
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(sagaMiddleware),
+  });
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof setupStore;
