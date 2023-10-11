@@ -11,13 +11,16 @@
     "test": "jest"
   },
   "dependencies": {
+    "@redux-saga/testing-utils": "^1.1.5",
     "@reduxjs/toolkit": "^1.9.6",
     "@types/jest": "^29.5.5",
+    "@types/redux-saga-tester": "^1.0.5",
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
-    "redux-saga": "^1.2.3"
+    "redux-saga": "^1.2.3",
+    "redux-saga-tester": "^1.0.874"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

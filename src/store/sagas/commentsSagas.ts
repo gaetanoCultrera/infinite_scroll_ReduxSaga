@@ -5,7 +5,7 @@ import {
   setStartLoading,
   updateDataContentCard,
 } from "../slice/commentsSlice";
-import axios, { AxiosResponse } from "axios";
+import get, { AxiosResponse } from "axios";
 import { KeySagas } from "../../constans/KeySagas";
 
 const fetchCommentsCall = () => ({
@@ -17,11 +17,11 @@ const fetchCommentsCall = () => ({
     type: string;
     payload: number;
   }) {
+    yield put(setStartLoading());
     try {
-      yield put(setStartLoading());
       const {
         data: { comments },
-      }: AxiosResponse<RootResponse> = yield axios.get<RootResponse>(
+      }: AxiosResponse<RootResponse> = yield get<RootResponse>(
         `https://dummyjson.com/comments?limit=10&skip=${skipValue}`
       );
       console.log(comments);
@@ -32,7 +32,7 @@ const fetchCommentsCall = () => ({
   },
 });
 
-const sagaConfig = {
+export const sagaConfig = {
   fetchCommentsCall: fetchCommentsCall(),
 };
 
